@@ -1,0 +1,93 @@
+---
+title: 'ZX Sonar1m Ultrasonic Sensor'
+sidebarTitle: 'เซนเซอร์วัดระยะ (Sonar)'
+description: 'การอ่านค่าระยะทางจาก ZX Sonar1m และการประยุกต์ใช้ทำภารกิจหลบสิ่งกีดขวาง'
+---
+
+## 🦇 หลักการทำงาน (Working Principle)
+
+**ZX Sonar1m** เป็นเซนเซอร์วัดระยะทางด้วยคลื่นเสียงอัลตราโซนิก (Ultrasonic) โดยมีหลักการทำงานดังนี้:
+1.  **ส่งคลื่นเสียง:** ปล่อยคลื่นเสียงความถี่สูงออกจากตัวส่ง (Transmitter)
+2.  **รอเสียงสะท้อน:** คลื่นเสียงกระทบวัตถุและสะท้อนกลับมาที่ตัวรับ (Receiver)
+3.  **แปลงค่า:** วงจรภายในจะแปลงระยะเวลาที่เสียงเดินทาง ให้เป็น **แรงดันไฟฟ้า (Analog Signal)** ส่งไปยังบอร์ดควบคุม
+
+
+
+[Image of ultrasonic sensor working principle]
+
+
+### การแปลงค่าสัญญาณ (Calculation)
+บอร์ด IROVER (ESP32) จะอ่านค่า Analog ได้ในช่วง **0 ถึง 4095** (12-bit) เราจึงต้องใช้สูตรแปลงค่าดิบ (Raw Data) ให้เป็นหน่วยเซนติเมตร
+
+$$
+\text{Distance (cm)} \approx \text{Raw Value} \times 0.024
+$$
+
+<Note>
+**หมายเหตุ:** ตัวเลข `0.024` เป็นค่าโดยประมาณจากการทดลอง หากต้องการความแม่นยำสูงสุด ควรทำ **การปรับเทียบ (Calibration)** เทียบกับไม้บรรทัดจริง
+</Note>
+
+---
+
+## 📏 กิจกรรมที่ 1: การอ่านค่าและแสดงผล (Distance Monitor)
+
+โปรเจกต์นี้จะอ่านค่าจากเซนเซอร์ที่ต่อกับพอร์ต **35** (Analog Pin) และแสดงผลขึ้นจอ OLED แบบ Real-time
+
+```python lines
+from irover import *
+from time import sleep
+
+i = IROVER()
+SONAR_PIN = 35   # กำหนดขาที่ต่อเซนเซอร์
+
+while True:
+    # 1. อ่านค่า Analog (0 - 4095)
+    raw = i.analog(SONAR_PIN)
+
+    # 2. แปลงเป็นระยะทาง (cm)
+    distance = raw * 0.024
+
+    # 3. แสดงผลบนจอ OLED
+    i.fill(0)
+    i.text("ZX Sonar1m", 0, 1)
+    i.text("Raw: %d" % raw, 0, 15)       # แสดงค่าดิบ
+    i.text("Dist: %.1f cm" % distance, 0, 30) # แสดงระยะทาง (ทศนิยม 1 ตำแหน่ง)
+    i.show()
+
+    sleep(0.2) # หน่วงเวลาให้อ่านค่าทัน
+```
+
+## Task ภารกิจหลบสิ่งกีดขวาง (Obstacle Avoidance)
+นำค่าระยะทางที่อ่านได้ มาสร้างเงื่อนไขให้หุ่นยนต์ตัดสินใจ:
+* ถ้าระยะ  `< 20 ซม.` (เจอวัตถุ) ➔ `สั่งหยุด`
+* ถ้าระยะ `>= 20 ซม.` (ทางสะดวก) ➔ `เดินหน้า`
+
+```python lines
+from irover import *
+from time import sleep
+
+i = IROVER()
+SONAR_PIN = 35   # ADC6
+
+THRESHOLD = 20  # ระยะ cm ที่ต้องหยุด
+
+while True:
+    raw = i.analog(SONAR_PIN)
+    distance = raw * 0.024
+
+    if distance < THRESHOLD:
+        i.motor(1, 0)
+        i.motor(2, 0)
+    else:
+        i.motor(1, 50)  # เดินตรง
+        i.motor(2, 50)
+
+    i.fill(0)
+    i.text("Dist: %.1f cm" % distance, 0, 1)
+    i.show()
+    sleep(0.2)
+
+
+
+
+```

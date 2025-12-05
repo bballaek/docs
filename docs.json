@@ -1,0 +1,59 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "maple",
+  "name": "Class-masterball-python",
+  "colors": {
+    "primary": "#3260ff",
+    "light": "#60A5FA",
+    "dark": "#1E40AF"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Lesson",
+        "pages": [
+          "essentials/python/lesson/Chapter-1",
+          "essentials/python/lesson/Chapter-2",
+          "essentials/python/lesson/Chapter-3",
+          "essentials/python/lesson/Chapter-5",
+          "essentials/python/lesson/Chapter-4",
+          "essentials/python/lesson/Chapter-6",
+          "essentials/python/lesson/Chapter-7",
+          "essentials/python/lesson/Chapter-8",
+          "essentials/python/lesson/Chapter-9",
+          "essentials/python/lesson/Chapter-10"
+          
+        ]
+      },
+
+      {
+        "group": "Assignment Book",
+        "pages": [
+          "essentials/python/assignment/blank-notebooks"
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Google Classroom",
+        "href": "mailto:your-email@example.com"
+      },
+      {
+        "label": "Colab",
+        "href": "mailto:your-email@example.com"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/your-username"
+    }
+  }
+}

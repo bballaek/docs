@@ -1,0 +1,71 @@
+---
+title: 'iROVER Command Reference'
+sidebarTitle: 'Digital & Analog'
+description: 'รวมชุดคำสั่งและไลบรารี่สำหรับหุ่นยนต์ iROVER (IPST Wi-Fi + iKB-1)'
+---
+## อินพุตและเอาต์พุต (Digital I/O)
+### การอ่านค่าอินพุต (Digital Input)
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="/images/17.png"
+/>
+
+รองรับทั้งคำสั่ง `input()` และ `IN()`
+อ่านจากบอร์ด iKB (พอร์ต i0-i7)
+```python lines
+x = i.input(i5)    # อ่านค่าจากพอร์ต i5
+```
+อ่านจากบอร์ด IPST-WiFi (ระบุเป็นตัวเลข)
+```python lines
+x = i.input(5)     # อ่านค่าจากพอร์ต 5
+x = i.IN(5)        # (ทางเลือก) อ่านค่าจากพอร์ต 5
+```
+
+---
+### การสั่งงานเอาต์พุต (Digital Output)
+รองรับทั้งคำสั่ง output() และ OUT()
+```python lines
+# สั่งงานบอร์ด iKB
+i.output(i5, 1)    # ให้ขา i5 มีสถานะ Logic "1" (High)
+
+# สั่งงานบอร์ด IPST-WiFi
+i.output(5, 1)     # ให้ขา 5 มีสถานะ Logic "1"
+i.OUT(5, 1)        # (ทางเลือก) ให้ขา 5 มีสถานะ Logic "1"
+```
+---
+## เซนเซอร์อะนาลอก (Analog & Knob)
+### อ่านค่าอะนาลอก (Analog Input)
+ใช้อ่านค่าจากเซนเซอร์ต่างๆ
+
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="/images/19.png"
+/>
+
+```python lines
+# อ่านค่าปกติ (ช่วง 0-1023)
+x = i.analog(i5)   # อ่านจากพอร์ต i5 ของ iKB
+
+# อ่านค่าแบบกำหนดช่วง (Map Value)
+# รูปแบบ: i.analog(พอร์ต, ค่าน้อยสุด, ค่ามากสุด)
+x = i.analog(i5, -100, 100) # อ่านพอร์ต i5 และแปลงค่าให้อยู่ในช่วง -100 ถึง 100
+
+# อ่านจากบอร์ด IPST-WiFi
+x = i.analog(34)   # อ่านจากพอร์ต 34
+```
+---
+### อ่านค่า Knob (ตัวต้านทานปรับค่าได้)
+อ่านค่าจากตัวหมุนปรับค่าบนบอร์ด IPST-WiFi
+
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="/images/20.png"
+/>
+
+```python lines
+# อ่านค่าปกติ (ช่วง 0-4095)
+x = i.knob()
+
+# อ่านค่าแบบกำหนดช่วง
+x = i.knob(-100, 100) # ปรับค่าให้อยู่ในช่วง -100 ถึง 100
+```

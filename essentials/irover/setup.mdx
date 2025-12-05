@@ -1,0 +1,49 @@
+---
+title: 'iROVER Robot Guide'
+sidebarTitle: 'Setup'
+description: 'คู่มือการใช้งานไลบรารี่และคำสั่งสำหรับหุ่นยนต์ iROVER (IPST Wi-Fi + iKB-1)'
+icon: 'gear'
+---
+
+## การเริ่มต้นใช้งาน (Setup)
+
+ขั้นตอนการติดตั้งและเตรียมความพร้อมสำหรับการเขียนโปรแกรมลงบอร์ด iROVER
+
+<Steps>
+  <Step title="ดาวน์โหลดไลบรารี่">
+    ไปที่เว็บไซต์ [GitHub: uPython_iRover](https://github.com/inexglobal/uPython_iRover) เพื่อดาวน์โหลดไลบรารี่ `irover`
+  </Step>
+  <Step title="ติดตั้งใน uPyCraft">
+    แตกไฟล์ที่ดาวน์โหลดมา และเปิดไฟล์เพื่อนำไปติดตั้งในโปรแกรม uPyCraft
+  </Step>
+  <Step title="เริ่มเขียนโปรแกรม">
+    เริ่มต้นไฟล์โปรแกรมด้วยการเรียกใช้ไลบรารี่ดังนี้:
+    ```python
+    from irover import *
+    i = IROVER()
+    ```
+  </Step>
+</Steps>
+
+---
+
+## การอ้างอิงขาพอร์ต (Pin Mapping)
+
+การระบุตำแหน่งขาใช้งานจะแบ่งออกเป็น 2 ส่วน คือขาของบอร์ดหลัก (IPST-WiFi) และขาของบอร์ดขยาย (iKB-1)
+
+<Note>
+**รูปแบบการระบุขา:**
+* **IPST-WiFi:** ใช้ตัวเลขตรงๆ เช่น `5`, `19`, `23`, `26`, `32`, `33`, `34`, `35`
+* **iKB-1:** ใช้รหัสขึ้นต้นด้วย i เช่น `i0` ถึง `i7`
+</Note>
+
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="/images/25.png"
+/>
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="/images/24.png"
+/>
+
+

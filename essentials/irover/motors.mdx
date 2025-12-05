@@ -1,0 +1,38 @@
+---
+title: 'iROVER Command Reference'
+sidebarTitle: 'Motors & Servos'
+description: 'รวมชุดคำสั่งและไลบรารี่สำหรับหุ่นยนต์ iROVER (IPST Wi-Fi + iKB-1)'
+---
+## การเคลื่อนที่ (Motors & Servos)
+### เซอร์โวมอเตอร์ (Servo)
+ควบคุมมุมของเซอร์โวมอเตอร์ที่ต่อกับบอร์ด iKB-1
+```python lines
+# รูปแบบ: i.servo(พอร์ต, องศา)
+i.servo(10, 0)     # สั่ง Servo ขา 10 ไปที่ 0 องศา
+i.servo(10, 180)   # สั่ง Servo ขา 10 ไปที่ 180 องศา
+```
+---
+
+### มอเตอร์ขับเคลื่อน (DC Motor)
+ควบคุมมอเตอร์หลักของหุ่นยนต์
+```python lines
+# รูปแบบ: i.motor(ช่องมอเตอร์, ความเร็ว%)
+# ความเร็วใส่ค่าติดลบได้เพื่อกลับทิศทาง (-100 ถึง 100)
+
+i.motor(1, 100)    # มอเตอร์ 1 เดินหน้า 100%
+i.motor(2, -100)   # มอเตอร์ 2 ถอยหลัง 100%
+
+i.stop()           # หยุดมอเตอร์ทั้ง 2 ช่องทันที
+```
+
+## Class Activites
+<CardGroup cols={1}>
+
+<Card title="Task 01: Basic Movement" icon="clipboard-check" href="/essentials/irover/project1">
+</Card>
+
+<Card title="Task 02: Square Path"  icon="clipboard-check" href="/essentials/irover/project2">
+</Card>
+
+</CardGroup>
+

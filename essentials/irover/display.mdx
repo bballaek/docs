@@ -1,0 +1,29 @@
+---
+title: 'iROVER Command Reference'
+sidebarTitle: 'Display & LED'
+description: 'รวมชุดคำสั่งและไลบรารี่สำหรับหุ่นยนต์ iROVER (IPST Wi-Fi + iKB-1)'
+---
+## การแสดงผล (Display & LED)
+### จอภาพ OLED
+ชุดคำสั่งสำหรับวาดข้อความและแสดงผลบนจอ OLED
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="/images/21.png"
+/>
+```python lines
+i.fill(0)                 # 1. เคลียร์หน้าจอ
+i.text("i-Rover", 0, 1)   # 2. วาดข้อความที่ตำแหน่ง X=0, Y=1
+i.text("i=%d"%100, 0, 15) # 3. วาดข้อความพร้อมตัวแปรที่ X=0, Y=15
+i.show()                  # 4. สั่งให้แสดงผลขึ้นหน้าจอ
+```
+---
+### ไฟสถานะ SLED (Smart LED)
+ควบคุมไฟ LED แบบ RGB
+```python lines
+# รูปแบบ: i.sled(ลำดับหลอด, (R, G, B))
+# ค่าสี R, G, B มีค่าได้ตั้งแต่ 0-255
+
+i.sled(0, (10, 0, 0))  # หลอดที่ 0 สีแดง
+i.sled(1, (0, 10, 0))  # หลอดที่ 1 สีเขียว
+i.sled(2, (0, 0, 10))  # หลอดที่ 2 สีน้ำเงิน
+```

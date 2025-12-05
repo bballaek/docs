@@ -1,0 +1,96 @@
+---
+title: "String"
+sidebarTitle: "Chapter 4: String"
+description: "เรียนรู้โครงสร้าง วิธีใช้งาน และฟังก์ชันสำคัญของ String ในภาษา Python"
+---
+
+## String คืออะไร?
+
+ในภาษา Python **สตริง (String)** คือ *ชุดของตัวอักขระ* ที่อาจประกอบด้วย:
+
+- ตัวอักษร  
+- ตัวเลข  
+- สัญลักษณ์  
+- ช่องว่าง (space)
+
+สตริงจะถูกครอบด้วย:
+
+- `'อัญประกาศเดี่ยว'`
+- `"อัญประกาศคู่"`
+- `'''อัญประกาศสามตัว'''`  
+- `"""อัญประกาศสามตัว"""`
+
+<String>
+ตัวอย่างสตริง:
+
+```python
+my_string = "Hello, I'm learning Python Programming"
+```
+</String>
+
+---
+
+## String เป็น Immutable
+
+สตริงใน Python **ไม่สามารถเปลี่ยนแปลงค่าภายในได้โดยตรง (Immutable)**  
+แต่สามารถสร้างสตริงใหม่จากสตริงเดิม เช่น การต่อ (concatenate) หรือการตัด (slice)
+
+> เมื่อแก้ไขสตริง Python จะสร้างสตริงใหม่ให้เสมอ
+
+---
+
+## String Methods ที่ใช้บ่อย
+
+<CardGroup cols={2}>
+  <Card title="len()" icon="ruler">
+    ใช้หาความยาวของสตริง
+  </Card>
+  <Card title="lower()" icon="arrow-down">
+    แปลงเป็นตัวพิมพ์เล็กทั้งหมด
+  </Card>
+  <Card title="upper()" icon="arrow-up">
+    แปลงเป็นตัวพิมพ์ใหญ่ทั้งหมด
+  </Card>
+  <Card title="split()" icon="list">
+    แยกสตริงออกเป็นลิสต์ของคำ
+  </Card>
+</CardGroup>
+
+---
+
+### ตัวอย่างรวม String Methods
+
+<CodeBlock language="python" title="string_methods.py">
+{`# ข้อความเริ่มต้น
+original_string = "Python Programming"
+
+# 1. ใช้ len() เพื่อแสดงความยาวของสตริง
+length = len(original_string)
+print(f"1. ความยาวของสตริงคือ: {length}")
+
+# 2. ใช้ lower() เพื่อแปลงเป็นตัวพิมพ์เล็ก
+lowercased_string = original_string.lower()
+print(f"2. ข้อความเริ่มต้น: {original_string}")
+print(f"   ตัวพิมพ์เล็ก: {lowercased_string}")
+
+# 3. ใช้ upper() เพื่อแปลงเป็นตัวพิมพ์ใหญ่
+uppercased_string = original_string.upper()
+print(f"3. ข้อความเริ่มต้น: {original_string}")
+print(f"   ตัวพิมพ์ใหญ่: {uppercased_string}")
+
+# 4. ใช้ split() เพื่อแยกเป็นลิสต์ของคำ
+word_list = original_string.split()
+print(f"4. ประโยคเริ่มต้น: {original_string}")
+print(f"   ลิสต์คำ: {word_list}")`}
+</CodeBlock>
+
+---
+
+<Tip icon="bulb">
+หากต้องการแสดง string หลายบรรทัด ให้ใช้ triple quotes เช่น:
+```python
+text = """Line 1
+Line 2
+Line 3"""
+```
+</Tip>
